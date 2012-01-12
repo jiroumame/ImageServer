@@ -1,0 +1,17 @@
+var net = require('net');
+var server = net.createServer(function(c) { //'connection' listener
+  console.log('server connected');
+  c.on('end', function() {
+    console.log('server disconnected');
+  });
+  c.on('data',function(d){
+	  c.write(d);
+  });
+  c.write('HTTP/1.1 200 OK\r\n');
+  c.write('Content-Length:5\r\n');
+  c.write('\r\n\r\n');
+  c.write('hello\r\n');
+});
+server.listen(8124, function() { //'listening' listener
+  console.log('server bound');
+});
