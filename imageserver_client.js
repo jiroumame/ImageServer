@@ -3,8 +3,10 @@ var net = require('net')
 var client = net.connect(8124,function(){
 });
 client.on('connect',function(){
-		fs.readFile('./imgserver/public/images/tes.jpg',function(err,data){
-			client.write(data);
-});
+		var read = fs.createReadStream('./1.png');
+		read.on('open',function(){
+console.log('opne');
+			read.pipe(client);
+		});
 
 });
