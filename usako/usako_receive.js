@@ -5,7 +5,7 @@ var con = amqp.createConnection({
 	host:'localhost'
 });
 con.on('ready',function(){
-	var queue = con.queue('usako',{exclusive:true});
+	var queue = con.queue('usako',{exclusive:false,durable:true,autoDelete:false});
 	queue.on('queueDeclareOk',function(args){
 		queue.bind('#');
 		queue.subscribe(function(m){
